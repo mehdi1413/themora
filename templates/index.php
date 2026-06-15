@@ -1,0 +1,1 @@
+<div id="themora-app" class="wrap">Welcome to themora</div>

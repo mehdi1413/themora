@@ -1,0 +1,19 @@
+{
+    "name": "mehdi/themora",
+    "description": "wordpress theme option forgert plugin",
+    "type": "project",
+    "license": "GPL",
+    "autoload": {
+        "psr-4": {
+            "Themora\\Inc\\": "./includes"
+        }
+    },
+    "authors": [
+        {
+            "name": "mehdi1413",
+            "email": "mehdifani4@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
