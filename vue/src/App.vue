@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {ref} from 'vue'
-
+import { RiArrowRightDoubleLine, RiArrowLeftSLine,RiCheckboxBlankCircleFill,RiMoonFill,RiSunFill } from '@remixicon/vue'
 
 interface MenuItem {
   title: string
@@ -14,7 +14,6 @@ interface MenuItem {
 const sidebarOpen = ref(false)
 const collapsed = ref(false)
 const isDark = ref(false)
-
 
 const activeItem = ref('')
 
@@ -215,175 +214,66 @@ const toggleTheme = () => {
 
 
 <template>
-
-
   <div class="flex h-screen py-tm-60 gap-4 overflow-hidden">
-
-
     <!-- overlay -->
-
     <div
-
         v-if="sidebarOpen"
-
-        class="
-fixed
-inset-0
-bg-black/50
-z-30
-lg:hidden
-"
-
+        class="fixed inset-0 bg-black/50 z-30 lg:hidden"
         @click="closeSidebar"
-
     />
-
-
     <!-- SIDEBAR -->
-
-    <aside
-
-
-        class="
-themora-menu
-bg-tm-primary
-fixed
-lg:relative
-right-0
-top-0
-z-40
-h-full
-p-tm-5
-rounded-tm-12
-shadow
-transition-all
-duration-300
-"
-
-
-        :class="[
-
-collapsed
-? 'w-20'
-: 'w-72',
-
-sidebarOpen
-? 'translate-x-0'
-: 'translate-x-full lg:translate-x-0'
-
-]"
-
-
+    <aside class="themora-menu bg-tm-primary fixed lg:relative right-0 top-0 z-40 h-full p-tm-5 rounded-tm-12 shadow transition-all duration-300"
+        :class="[collapsed? 'w-20': 'w-72', sidebarOpen ? 'translate-x-0': 'translate-x-full lg:translate-x-0']"
     >
-
-
       <button
-
           @click="toggleSidebar"
-
-          class="absolute -left-3
-top-3
-bg-white
-rounded-full
-p-1
-shadow
-cursor-pointer
-"
+          class="absolute -left-3 top-3 bg-white rounded-full p-1 shadow cursor-pointer"
       >
-        <svg class="w-5 h-5 transition-transform duration-300 ease-in-out" :class="{'rotate-180': collapsed}"
-             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-          <path
-              d="M19.1642 12L12.9571 5.79291L11.5429 7.20712L16.3358 12L11.5429 16.7929L12.9571 18.2071L19.1642 12ZM13.5143 12L7.30722 5.79291L5.89301 7.20712L10.6859 12L5.89301 16.7929L7.30722 18.2071L13.5143 12Z"></path>
-        </svg>
+        <RiArrowRightDoubleLine
+            class="w-5 h-5 transition-transform duration-300 ease-in-out" :class="{'rotate-180': collapsed}"
+            size="20px"
+        />
       </button>
 
       <nav>
         <div class="fd-setting-brand-wrapper">
-
-
           <div
               v-show="!collapsed"
               class="fd-brand-texts"
           >
-
             <p class="brand-text m-0">
               آژانس خلاقیت <span>فرادید</span>
             </p>
-
-
             <p class="brand-slogan m-0">
               Faradid Creative Agency
             </p>
-
-
           </div>
-
-
           <img
-
               src="http://localhost/wp-developer/faradid/wp-content/themes/faradid/assets/admin/images/settings/logo-light.svg"
-
               width="48"
-
           />
-
-
         </div>
 
-
         <ul class="themora-tabs space-y-1">
-
-
           <li
-
               v-for="(item,index) in menus"
-
               :key="index"
-
               class="relative"
-
-
           >
-
-
             <div
-
-
                 class="
-themora-tab-list-item
-flex
-items-center
-justify-between
-text-white
-p-tm-10
-rounded-lg
-cursor-pointer
-transition-all
-duration-300 hover:text-tm-dark
-"
-
-
-                :class="{
-
-active:
-activeItem === `${index}`
-
-}"
-
-
-                @click="
-
-setActiveItem(`${index}`);
-
-item.children &&
-toggleSubmenu(
-`${index}`,
-0
-)
-
-"
-
-
+                themora-tab-list-item
+                flex
+                items-center
+                justify-between
+                text-white
+                p-tm-10
+                rounded-lg
+                cursor-pointer
+                transition-all
+                duration-300 hover:text-tm-dark"
+                :class="{active:activeItem === `${index}`}"
+                @click="setActiveItem(`${index}`);item.children &&toggleSubmenu(`${index}`,0)"
             >
 
 
@@ -456,17 +346,7 @@ isOpen(`${index}`,0)
               >
 
 
-                <ul
-
-                    v-if="item.children"
-
-                    class="
-themora-submenu
-bg-tm-dark-2
-rounded-b-tm-6
-"
-
-                >
+                <ul v-if="item.children" class="themora-submenu">
 
 
                   <li
@@ -509,186 +389,61 @@ toggleSubmenu(
 
 ">
                       <div class="tm-submenu-item-text-wrap flex items-center gap-2">
-                        <div class="
-w-1
-    h-1
-    rounded-full
-    border
-    border-white
-    group-hover:border-0
-    group-hover:bg-tm-secondary"></div>
-                        <span class="tm-submenu-list-text mr-5">{{ child.title }}</span>
+                        <RiCheckboxBlankCircleFill size="6px"/>
+                        <span class="tm-submenu-list-text mr-tm-10">{{ child.title }}</span>
                       </div>
-                      <svg
-
+                      <RiArrowLeftSLine
                           v-if="child.children"
-
-                          class="
-w-4
-h-4
-transition-transform
-duration-300
-ease-in-out
-"
-
-                          :class="{
-
-'-rotate-90':
-
-isOpen(
-`${index}-${cIndex}`,
-1
-)
-
-}"
-
-                          fill="currentColor"
-
-                          viewBox="0 0 24 24"
-
-                      >
-
-
-                        <path
-                            d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"/>
-
-
-                      </svg>
+                          class="transition-transform duration-300 ease-in-out"
+                          :class="{'-rotate-90':isOpen(`${index}-${cIndex}`,1)}"
+                          size="20px"
+                      />
                     </div>
-
-
                     <Transition name="submenu">
                       <div class="submenu-wrapper" :class="{open:isOpen(`${index}-${cIndex}`,1)}">
                         <ul v-if="child.children" class="pl-6">
                           <li v-for="(sub,sIndex) in child.children"
-
                               :key="sIndex"
-                              class="px-4 py-2 cursor-pointer"
-                              :class="{
-
-active:
-
-activeItem ===
-`${index}-${cIndex}-${sIndex}`
-
-}"
-
-                              @click.stop="
-
-setActiveItem(
-`${index}-${cIndex}-${sIndex}`
-)
-
-"
-
+                              class="pr-tm-10 cursor-pointer"
+                              :class="{active:activeItem ===`${index}-${cIndex}-${sIndex}`}"
+                              @click.stop="setActiveItem(`${index}-${cIndex}-${sIndex}`)"
                           >
-
-
-                            {{ sub.title }}
-
-
+                            <div class="group text-white px-4 py-3 cursor-pointer flex gap-4 items-center transition-all hover:text-tm-secondary active">
+                              <RiCheckboxBlankCircleFill size="6px"/>
+                              <span>{{ sub.title }}</span>
+                            </div>
                           </li>
-
-
                         </ul>
-
-
                       </div>
-
-
                     </Transition>
-
-
                   </li>
-
-
                 </ul>
-
-
               </div>
-
-
             </Transition>
-
-
           </li>
-
-
         </ul>
-
-
       </nav>
-
-
     </aside>
 
-
-    <section
-
-        class="
-flex-1
-flex
-flex-col
-overflow-hidden
-bg-white
-p-tm-30
-rounded-tm-12
-"
-
-    >
-
-
-      <header
-
-          class="
-border-b
-border-dashed
-border-tm-light-grey
-py-4
-flex
-justify-between
-"
-
-      >
-
-
+    <section class="flex-1 flex flex-col overflow-hidden bg-white p-tm-30 rounded-tm-12">
+      <header class="border-b border-dashed border-tm-light-grey py-4 flex justify-between">
         <button
-
             @click="openSidebar"
-
             class="lg:hidden"
-
         >
           ☰
         </button>
 
-
-        <h2 class="text-2xl">
-
-          Welcome to Themora
-
-        </h2>
-
+        <h2 class="text-2xl">Welcome to Themora</h2>
 
         <button
-
             @click="toggleTheme"
-
-            class="
-size-tm-40
-rounded
-border
-"
-
+            class="flex items-center justify-center size-tm-40 rounded-full border border-tm-light-grey"
         >
-
-          {{ isDark ? '☀️' : '🌙' }}
-
+          <RiSunFill v-if="isDark" size="20px" color="var(--color-tm-secondary)"/>
+          <RiMoonFill v-else size="20px" color="var(--color-tm-dark)"/>
         </button>
-
-
       </header>
-
 
       <main class="py-6">
 
@@ -706,9 +461,7 @@ border
       </footer>
     </section>
 
-
   </div>
-
 
 </template>
 
