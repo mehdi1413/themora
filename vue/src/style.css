@@ -3,6 +3,7 @@
 @theme {
     /* Colors */
     --color-tm-primary: #C52F32;
+    --color-tm-secondary: #E89D26;
     --color-tm-dark: #222222;
     --color-tm-dark-2: #111827c2;
     --color-tm-grey: #555555;
@@ -24,20 +25,3 @@
     --spacing-tm-10: 10px;
     --spacing-tm-16: 16px;
 }
-
-/*.themora-submenu{*/
-/*    background-color: var(--color-tm-dark-2);*/
-/*    padding: 0 43px 0 0;*/
-/*    color: #FFFFFF;*/
-/*    max-height: 0;*/
-/*    opacity: 0;*/
-/*    overflow: hidden;*/
-/*    transition: max-height 0.35s ease, opacity 0.25s ease, padding 0.35s ease;*/
-/*}*/
-/*.themora-submenu.open{*/
-/*    padding: 10px 43px 10px 0;*/
-/*    max-height: 500px;*/
-/*    border-bottom-left-radius: 6px;*/
-/*    border-bottom-right-radius: 6px;*/
-/*    opacity: 1;*/
-/*}*/
