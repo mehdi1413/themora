@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {ref} from 'vue'
-import { RiArrowRightDoubleLine, RiArrowLeftSLine,RiCheckboxBlankCircleFill,RiMoonFill,RiSunFill } from '@remixicon/vue'
+import { RiArrowRightDoubleLine, RiArrowLeftSLine,RiCheckboxBlankCircleFill,RiMoonFill,RiSunFill,RiMenuLine } from '@remixicon/vue'
 
 interface MenuItem {
   title: string
@@ -276,118 +276,46 @@ const toggleTheme = () => {
                 @click="setActiveItem(`${index}`);item.children &&toggleSubmenu(`${index}`,0)"
             >
 
-
               <div class="flex items-center gap-3">
-
-
-<span>
-{{ item.icon }}
-</span>
-
-
-                <span v-show="!collapsed">
-
-{{ item.title }}
-
-</span>
-
-
+                <span>{{ item.icon }}</span>
+                <span v-show="!collapsed">{{ item.title }}</span>
               </div>
 
-
-              <svg
-
+              <RiArrowLeftSLine
+                  class="transition-transform duration-300 ease-in-out"
+                  size="20px"
                   v-if="item.children && !collapsed"
-
-                  class="
-w-5
-h-5
-transition-transform
-duration-300
-ease-in-out
-"
-
-                  :class="{
-
-'-rotate-90':
-isOpen(`${index}`,0)
-
-}"
-
-                  fill="currentColor"
-
-                  viewBox="0 0 24 24"
-
-              >
-
-                <path
-                    d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"/>
-
-              </svg>
-
-
+                  :class="{'-rotate-90':isOpen(`${index}`,0)}"
+              />
             </div>
-
 
             <Transition name="submenu">
 
-
               <div
-
                   class="submenu-wrapper"
-
-                  :class="{
-
-open:
-isOpen(`${index}`,0)
-
-}"
-
+                  :class="{open:isOpen(`${index}`,0)}"
               >
 
-
                 <ul v-if="item.children" class="themora-submenu">
-
-
                   <li
-
                       v-for="(child,cIndex) in item.children"
-
                       :key="cIndex"
-
                   >
 
-
-                    <div class="group text-white px-4
-py-3
-cursor-pointer
-flex
-justify-between
-items-center transition-all hover:text-tm-secondary
-"
-
-
-                         :class="{
-
-active:
-activeItem === `${index}-${cIndex}`
-
-}"
-
-
-                         @click.stop="
-
-setActiveItem(
-`${index}-${cIndex}`
-);
-
-child.children &&
-toggleSubmenu(
-`${index}-${cIndex}`,
-1
-)
-
-">
+                    <div
+                        class="
+                        group
+                        text-white
+                        px-4
+                        py-3
+                        cursor-pointer
+                        flex
+                        justify-between
+                        items-center transition-all hover:text-tm-secondary"
+                        :class="{active:activeItem === `${index}-${cIndex}`}"
+                        @click.stop="setActiveItem(`${index}-${cIndex}`);
+                        child.children && toggleSubmenu(`${index}-${cIndex}`,1)"
+                    >
                       <div class="tm-submenu-item-text-wrap flex items-center gap-2">
                         <RiCheckboxBlankCircleFill size="6px"/>
                         <span class="tm-submenu-list-text mr-tm-10">{{ child.title }}</span>
@@ -431,7 +359,7 @@ toggleSubmenu(
             @click="openSidebar"
             class="lg:hidden"
         >
-          ☰
+          <RiMenuLine size="24px"/>
         </button>
 
         <h2 class="text-2xl">Welcome to Themora</h2>
@@ -446,14 +374,7 @@ toggleSubmenu(
       </header>
 
       <main class="py-6">
-
-        <h2 class="text-xl text-white">
-
-          تنظیمات عمومی
-
-        </h2>
-
-
+        <h2 class="text-xl text-white">تنظیمات عمومی</h2>
       </main>
 
       <footer class="pt-4 border-t border-dashed border-tm-light-grey">
