@@ -1,1 +1,43 @@
 @import "tailwindcss";
+
+@theme {
+    /* Colors */
+    --color-tm-primary: #C52F32;
+    --color-tm-dark: #222222;
+    --color-tm-dark-2: #111827c2;
+    --color-tm-grey: #555555;
+    --color-tm-light-grey: #DDDDDD;
+    --color-tm-green: #118E62;
+    --color-tm-transparent: #ffffff3d;
+
+    /* Radius */
+    --radius-tm-12: 12px;
+    --radius-tm-6: 6px;
+
+    /* Spacing */
+    --spacing-tm-5: 5px;
+    --spacing-tm-60: 60px;
+    --spacing-tm-48: 48px;
+    --spacing-tm-40: 40px;
+    --spacing-tm-30: 30px;
+    --spacing-tm-12: 12px;
+    --spacing-tm-10: 10px;
+    --spacing-tm-16: 16px;
+}
+
+/*.themora-submenu{*/
+/*    background-color: var(--color-tm-dark-2);*/
+/*    padding: 0 43px 0 0;*/
+/*    color: #FFFFFF;*/
+/*    max-height: 0;*/
+/*    opacity: 0;*/
+/*    overflow: hidden;*/
+/*    transition: max-height 0.35s ease, opacity 0.25s ease, padding 0.35s ease;*/
+/*}*/
+/*.themora-submenu.open{*/
+/*    padding: 10px 43px 10px 0;*/
+/*    max-height: 500px;*/
+/*    border-bottom-left-radius: 6px;*/
+/*    border-bottom-right-radius: 6px;*/
+/*    opacity: 1;*/
+/*}*/
