@@ -11,17 +11,144 @@
     --color-tm-green: #118E62;
     --color-tm-transparent: #ffffff3d;
 
+    /* text size */
+    --text-tm-16: 16px;
+    --text-tm-16--line-height: 24px;
+    --text-tm-14: 14px;
+    --text-tm-14--line-height: 20px;
+    --text-tm-13: 13px;
+    --text-tm-13--line-height: 18px;
+    --text-tm-12: 12px;
+    --text-tm-12--line-height: 16px;
+
     /* Radius */
     --radius-tm-12: 12px;
     --radius-tm-6: 6px;
 
     /* Spacing */
-    --spacing-tm-5: 5px;
     --spacing-tm-60: 60px;
     --spacing-tm-48: 48px;
     --spacing-tm-40: 40px;
     --spacing-tm-30: 30px;
+    --spacing-tm-20: 20px;
+    --spacing-tm-16: 16px;
+    --spacing-tm-14: 14px;
     --spacing-tm-12: 12px;
     --spacing-tm-10: 10px;
-    --spacing-tm-16: 16px;
+    --spacing-tm-5: 5px;
+    --spacing-tm-zero: 0;
+}
+
+@font-face {
+    font-family: 'peyda';
+    font-style: normal;
+    font-weight: normal;
+    src: url('assets/fonts/woff2/PeydaFaNumWeb-Regular.woff2') format('woff2'),
+    url('assets/fonts/woff/PeydaFaNumWeb-Regular.woff') format('woff');
+    font-display: swap;
+}
+@font-face {
+    font-family: 'peyda';
+    font-style: normal;
+    font-weight: 500;
+    src: url('assets/fonts/woff2/PeydaFaNumWeb-Medium.woff2') format('woff2'),
+    url('assets/fonts/woff/PeydaFaNumWeb-Medium.woff') format('woff');
+    font-display: swap;
+}
+@font-face {
+    font-family: 'peyda';
+    font-style: normal;
+    font-weight: 600;
+    src: url('assets/fonts/woff2/PeydaFaNumWeb-SemiBold.woff2') format('woff2'),
+    url('assets/fonts/woff/PeydaFaNumWeb-SemiBold.woff') format('woff');
+    font-display: swap;
+}
+@font-face {
+    font-family: 'peyda';
+    font-style: normal;
+    font-weight: bold;
+    src: url('assets/fonts/woff2/PeydaFaNumWeb-Bold.woff2') format('woff2'),
+    url('assets/fonts/woff/PeydaFaNumWeb-Bold.woff') format('woff');
+    font-display: swap;
+}
+@font-face {
+    font-family: 'peyda';
+    font-style: normal;
+    font-weight: 800;
+    src: url('assets/fonts/woff2/PeydaFaNumWeb-ExtraBold.woff2') format('woff2'),
+    url('assets/fonts/woff/PeydaFaNumWeb-ExtraBold.woff') format('woff');
+    font-display: swap;
+}
+@font-face {
+    font-family: 'peyda';
+    font-style: normal;
+    font-weight: 900;
+    src: url('assets/fonts/woff2/PeydaFaNumWeb-Black.woff2') format('woff2'),
+    url('assets/fonts/woff/PeydaFaNumWeb-Black.woff') format('woff');
+    font-display: swap;
+}
+#themora-app {
+    font-family: 'peyda';
+    font-size: var(--text-tm-16);
+}
+#themora-app *,
+#themora-app *::before,
+#themora-app *::after,
+#themora-app p,
+#themora-app h1,
+#themora-app h2,
+#themora-app h3,
+#themora-app ul,
+#themora-app button {
+    box-sizing: border-box;
+}
+
+#themora-app p {
+    margin: 0;
+}
+
+#themora-app button:focus,
+#themora-app button:active,
+#themora-app button:focus-visible {
+    outline: none;
+}
+
+.themora-menu .tm-brand-texts .brand-text {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111111;
+}
+
+.themora-menu .tm-brand-texts .brand-slogan{
+    font-size: var(--text-tm-14);
+}
+
+
+.themora-tab-list-item {
+    background: #ffffff3d;
+    color: white;
+    border-radius: var(--radius-tm-6);
+    transition: border-radius 0.3s ease;
+}
+
+.themora-tab-list-item.active {
+    color: #000000;
+    background-color: #FFFFFF;
+}
+
+.tm-submenu-wrapper {
+    display: grid;
+    grid-template-rows:0fr;
+    opacity: 0;
+    transition: grid-template-rows .3s ease, opacity .3s ease;
+}
+
+.tm-submenu-wrapper.open {
+    grid-template-rows:1fr;
+    opacity: 1;
+}
+
+.tm-submenu-wrapper > ul {
+    overflow: hidden;
+    min-height: 0;
 }

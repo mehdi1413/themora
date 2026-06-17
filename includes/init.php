@@ -22,7 +22,7 @@ function thm_render_page(): void {
 	include plugin_dir_path( THM_PLUGIN_PATH ) . 'templates/index.php';
 }
 
-add_action( 'admin_enqueue_scripts', 'wp_ato_scripts' );
+add_action( 'admin_enqueue_scripts', 'wp_ato_scripts', 99);
 
 function wp_ato_scripts( $hook ): void {
 	if (
@@ -40,11 +40,13 @@ function wp_ato_scripts( $hook ): void {
 		true
 	);
 
-	wp_enqueue_style(
+	wp_register_style(
 		'thm-vue-css',
 		plugin_dir_url( THM_PLUGIN_PATH ) . 'dist/assets/index.css',
+		[]
 	);
 
+	wp_enqueue_style('thm-vue-css');
 }
 
 

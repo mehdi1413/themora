@@ -1,7 +1,16 @@
 <script setup lang="ts">
 
 import {ref} from 'vue'
-import { RiArrowRightDoubleLine, RiArrowLeftSLine,RiCheckboxBlankCircleFill,RiMoonFill,RiSunFill,RiMenuLine } from '@remixicon/vue'
+import BrandLayout from './components/layouts/BrandLayout.vue'
+
+import {
+  RiArrowRightDoubleLine,
+  RiArrowLeftSLine,
+  RiCheckboxBlankCircleFill,
+  RiMoonFill,
+  RiSunFill,
+  RiMenuLine
+} from '@remixicon/vue'
 
 interface MenuItem {
   title: string
@@ -173,13 +182,17 @@ const setActiveItem = (
 
 }
 
-
-const toggleSidebar = () => {
-
-  collapsed.value = !collapsed.value
-
+const hasActiveChild = (key: string) => {
+  return activeItem.value.startsWith(key + '-')
 }
 
+const toggleSidebar = () => {
+  collapsed.value = !collapsed.value
+
+  if(collapsed.value){
+    openedMenus.value = {}
+  }
+}
 
 const openSidebar = () => {
 
@@ -223,7 +236,7 @@ const toggleTheme = () => {
     />
     <!-- SIDEBAR -->
     <aside class="themora-menu bg-tm-primary fixed lg:relative right-0 top-0 z-40 h-full p-tm-5 rounded-tm-12 shadow transition-all duration-300"
-        :class="[collapsed? 'w-20': 'w-72', sidebarOpen ? 'translate-x-0': 'translate-x-full lg:translate-x-0']"
+        :class="[collapsed? 'w-20 sidebar-collapse': 'w-72 sidebar-open', sidebarOpen ? 'translate-x-0': 'translate-x-full lg:translate-x-0']"
     >
       <button
           @click="toggleSidebar"
@@ -236,23 +249,7 @@ const toggleTheme = () => {
       </button>
 
       <nav>
-        <div class="fd-setting-brand-wrapper">
-          <div
-              v-show="!collapsed"
-              class="fd-brand-texts"
-          >
-            <p class="brand-text m-0">
-              آژانس خلاقیت <span>فرادید</span>
-            </p>
-            <p class="brand-slogan m-0">
-              Faradid Creative Agency
-            </p>
-          </div>
-          <img
-              src="http://localhost/wp-developer/faradid/wp-content/themes/faradid/assets/admin/images/settings/logo-light.svg"
-              width="48"
-          />
-        </div>
+        <BrandLayout :collapsed="collapsed" />
 
         <ul class="themora-tabs space-y-1">
           <li
@@ -272,15 +269,15 @@ const toggleTheme = () => {
                 cursor-pointer
                 transition-all
                 duration-300 hover:text-tm-dark"
-                :class="{active:activeItem === `${index}`}"
+
+                :class="{active:activeItem === `${index}`|| hasActiveChild(`${index}`)}"
                 @click="setActiveItem(`${index}`);item.children &&toggleSubmenu(`${index}`,0)"
             >
 
               <div class="flex items-center gap-3">
                 <span>{{ item.icon }}</span>
-                <span v-show="!collapsed">{{ item.title }}</span>
+                <span class="text-tm-13" v-show="!collapsed">{{ item.title }}</span>
               </div>
-
               <RiArrowLeftSLine
                   class="transition-transform duration-300 ease-in-out"
                   size="20px"
@@ -292,7 +289,7 @@ const toggleTheme = () => {
             <Transition name="submenu">
 
               <div
-                  class="submenu-wrapper"
+                  class="tm-submenu-wrapper"
                   :class="{open:isOpen(`${index}`,0)}"
               >
 
@@ -312,13 +309,13 @@ const toggleTheme = () => {
                         flex
                         justify-between
                         items-center transition-all hover:text-tm-secondary"
-                        :class="{active:activeItem === `${index}-${cIndex}`}"
+                        :class="{ active:activeItem === `${index}-${cIndex}`|| hasActiveChild(`${index}-${cIndex}`)}"
                         @click.stop="setActiveItem(`${index}-${cIndex}`);
                         child.children && toggleSubmenu(`${index}-${cIndex}`,1)"
                     >
                       <div class="tm-submenu-item-text-wrap flex items-center gap-2">
                         <RiCheckboxBlankCircleFill size="6px"/>
-                        <span class="tm-submenu-list-text mr-tm-10">{{ child.title }}</span>
+                        <span class="tm-submenu-list-text text-tm-13 mr-tm-10">{{ child.title }}</span>
                       </div>
                       <RiArrowLeftSLine
                           v-if="child.children"
@@ -328,7 +325,7 @@ const toggleTheme = () => {
                       />
                     </div>
                     <Transition name="submenu">
-                      <div class="submenu-wrapper" :class="{open:isOpen(`${index}-${cIndex}`,1)}">
+                      <div class="tm-submenu-wrapper" :class="{open:isOpen(`${index}-${cIndex}`,1)}">
                         <ul v-if="child.children" class="pl-6">
                           <li v-for="(sub,sIndex) in child.children"
                               :key="sIndex"
@@ -336,9 +333,9 @@ const toggleTheme = () => {
                               :class="{active:activeItem ===`${index}-${cIndex}-${sIndex}`}"
                               @click.stop="setActiveItem(`${index}-${cIndex}-${sIndex}`)"
                           >
-                            <div class="group text-white px-4 py-3 cursor-pointer flex gap-4 items-center transition-all hover:text-tm-secondary active">
+                            <div class="group text-white px-4 py-3 cursor-pointer flex gap-4 items-center transition-all hover:text-tm-secondary">
                               <RiCheckboxBlankCircleFill size="6px"/>
-                              <span>{{ sub.title }}</span>
+                              <span class="text-tm-13">{{ sub.title }}</span>
                             </div>
                           </li>
                         </ul>
@@ -381,41 +378,5 @@ const toggleTheme = () => {
         <button class="text-white bg-tm-green rounded-tm-6 px-6 py-2 cursor-pointer">save</button>
       </footer>
     </section>
-
   </div>
-
 </template>
-
-
-<style scoped>
-.submenu-wrapper {
-
-  display: grid;
-
-  grid-template-rows:0fr;
-
-  opacity: 0;
-
-  transition: grid-template-rows .3s ease,
-  opacity .3s ease;
-
-}
-
-.submenu-wrapper.open {
-  grid-template-rows:1fr;
-  opacity: 1;
-}
-
-.submenu-wrapper > ul {
-
-  overflow: hidden;
-
-  min-height: 0;
-
-}
-
-.active {
-  background: var(--tm-primary);
-  color: white;
-}
-</style>
