@@ -1,115 +1,375 @@
 <script setup lang="ts">
-import {computed, ref} from 'vue'
+
+import {ref, computed, watch} from 'vue'
+import {ColorPicker} from 'vue-color-kit'
+import 'vue-color-kit/dist/vue-color-kit.css'
+
 import FieldWrapper from '../ui/FieldWrapper.vue'
 
-const props = defineProps<{
-  id: string
-  label: string
-  modelValue: string
-}>()
+
+type ColorFormat = 'hex' | 'hexa' | 'rgb' | 'rgba'
+
+
+const props = withDefaults(
+    defineProps<{
+      id:string
+      label:string
+      modelValue:string
+      format?:ColorFormat
+    }>(),
+    {
+      format:'hex'
+    }
+)
+
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void
+  (e:'update:modelValue',value:string):void
 }>()
 
-const menuOpen = ref(false)
 
-const color = computed({
-  get: () => props.modelValue,
-  set: value => emit('update:modelValue', value)
+
+const open = ref(false)
+
+
+const selectedFormat = ref<ColorFormat>(
+    props.format
+)
+
+
+
+const color = ref(
+    props.modelValue || '#ffffff'
+)
+
+
+
+watch(
+    ()=>props.modelValue,
+    value=>{
+      if(value){
+        color.value = value
+      }
+    }
+)
+
+
+
+const displayValue = computed(()=>{
+
+  return color.value
+
 })
 
-const swatchStyle = computed(() => ({
-  backgroundColor: color.value,
-  borderRadius: menuOpen.value ? '50%' : '6px'
-}))
+
+
+function convertColor(value:any){
+
+
+  const hex = value.hex
+
+
+  if(selectedFormat.value === 'hex'){
+
+    return hex.slice(0,7)
+
+  }
+
+
+
+  if(selectedFormat.value === 'hexa'){
+
+    return hex
+
+  }
+
+
+
+  if(
+      selectedFormat.value === 'rgb' ||
+      selectedFormat.value === 'rgba'
+  ){
+
+    const rgb = value.rgba
+
+
+    if(selectedFormat.value === 'rgb'){
+
+      return `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`
+
+    }
+
+
+    return `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${rgb.a})`
+
+  }
+
+}
+
+
+
+function changeColor(value:any){
+
+  color.value = value.hex
+
+
+  emit(
+      'update:modelValue',
+      convertColor(value)
+  )
+
+}
+
+
+
+function changeFormat(format:ColorFormat){
+
+  selectedFormat.value = format
+
+
+  emit(
+      'update:modelValue',
+      convertColor({
+        hex:color.value,
+        rgba:{
+          r:0,
+          g:0,
+          b:0,
+          a:1
+        }
+      })
+  )
+
+}
+
+
 </script>
 
+
 <template>
+
+
   <FieldWrapper
       :id="id"
       :label="label"
   >
 
+
     <div class="tm-color-field">
 
-      <input
-          :id="id"
-          v-model="color"
-          type="text"
-          class="tm-color-input"
-      >
 
-      <div
-          class="tm-color-swatch"
-          :style="swatchStyle"
-          @click="menuOpen = !menuOpen"
+
+      <input
+
+          class="tm-color-input"
+
+          :value="displayValue"
+
+          readonly
+
       />
 
-      <div
-          v-if="menuOpen"
-          class="tm-color-popover"
+
+
+      <button
+
+          class="tm-color-button"
+
+          type="button"
+
+          @click="open=!open"
+
       >
-        <input
-            v-model="color"
-            type="color"
-            class="tm-native-color-picker"
-        >
+
+
+<span
+
+    class="tm-color-preview"
+
+    :style="{
+      background:color
+    }"
+
+/>
+
+
+      </button>
+
+
+
+      <div
+          v-if="open"
+
+          class="tm-color-popup"
+      >
+
+
+        <ColorPicker
+
+            :color="color"
+
+            theme="light"
+
+            :sucker-hide="true"
+
+            @changeColor="changeColor"
+
+        />
+
+
+
+        <div class="tm-color-formats">
+
+
+          <button
+              v-for="item in ['hex','hexa','rgb','rgba']"
+
+              :key="item"
+
+              type="button"
+
+              :class="{
+      active:selectedFormat===item
+    }"
+
+              @click="changeFormat(item as ColorFormat)"
+          >
+
+            {{item.toUpperCase()}}
+
+          </button>
+
+
+        </div>
+
+
       </div>
+
+
 
     </div>
 
+
+
   </FieldWrapper>
+
+
 </template>
 
 <style scoped>
 
-.tm-color-field {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.tm-color-field{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-.tm-color-input {
-  width: 180px;
-  height: 40px;
-  padding: 0 12px;
 
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
+.tm-color-input{
+
+  width:150px;
+  height:40px;
+
+  border:1px solid #cbd5e0;
+  border-radius:8px;
+
+  padding:0 12px;
+
+  background:white;
+
+  font-size:13px;
+
 }
 
-.tm-color-swatch {
-  width: 32px;
-  height: 32px;
 
-  cursor: pointer;
+.tm-color-button{
 
-  transition: .2s;
+  width:42px;
+  height:42px;
+
+  border-radius:8px;
+
+  background:white;
+
+  border:1px solid #ddd;
+
+  padding:5px;
+
+  cursor:pointer;
+
 }
 
-.tm-color-popover {
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
 
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
 
-  padding: 12px;
+.tm-color-preview{
 
-  box-shadow: 0 8px 20px rgba(0, 0, 0, .1);
+  display:block;
 
-  z-index: 100;
+  width:100%;
+  height:100%;
+
+  border-radius:6px;
+
 }
 
-.tm-native-color-picker {
-  width: 220px;
-  height: 180px;
-  border: none;
-  padding: 0;
+
+
+.tm-color-popup{
+
+  position:absolute;
+
+  top:48px;
+  right:0;
+
+  z-index:99999;
+
+  background:white;
+
+  padding:12px;
+
+  border-radius:14px;
+
+  box-shadow:
+      0 15px 40px rgba(0,0,0,.15);
+
+}
+
+
+
+.tm-color-formats{
+
+  display:flex;
+
+  gap:6px;
+
+  margin-top:12px;
+
+}
+
+
+.tm-color-formats button{
+
+  border:1px solid #ddd;
+
+  background:white;
+
+  padding:5px 8px;
+
+  border-radius:6px;
+
+  cursor:pointer;
+
+  font-size:11px;
+
+}
+
+
+.tm-color-formats button.active{
+
+  background:#1a202c;
+  color:white;
+
 }
 
 </style>

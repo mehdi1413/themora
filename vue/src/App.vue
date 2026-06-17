@@ -15,6 +15,7 @@ import {
 import TextField from "./components/fields/TextField.vue";
 import ToggleField from "./components/fields/ToggleField.vue";
 import NumberTextField from "./components/fields/NumberTextField.vue";
+import ColorPickerField from "./components/fields/ColorPickerField.vue";
 
 
 interface MenuItem {
@@ -34,7 +35,13 @@ const settings = reactive({
     perPage: 12
   },
   colors: {
-    primaryColor: '#11b76b'
+    primaryColor: '#c52f32',
+    secondaryColor: '#e89d26',
+    darkColor: '#222222',
+    whiteColor: '#FFFFFF',
+    greyColor: '#555555',
+    greenColor: '#118E62',
+    blueColor: '#1B619A',
   }
 })
 
@@ -246,7 +253,7 @@ const toggleTheme = () => {
 
 
 <template>
-  <div class="flex h-screen py-tm-60 gap-4 overflow-hidden select-none">
+  <div class="flex h-screen py-tm-60 gap-4 select-none">
     <!-- overlay -->
     <div
         v-if="sidebarOpen"
@@ -371,7 +378,7 @@ const toggleTheme = () => {
       </nav>
     </aside>
 
-    <section class="flex-1 flex flex-col overflow-hidden bg-white p-tm-30 rounded-tm-12">
+    <section class="flex-1 flex flex-col bg-white p-tm-30 rounded-tm-12">
       <form>
         <header class="border-b border-dashed border-tm-light-grey py-4 flex justify-between">
           <button type="button"
@@ -393,6 +400,16 @@ const toggleTheme = () => {
         </header>
         <main class="tm-tab-content py-6">
           <h2 class="text-xl text-white">تنظیمات عمومی</h2>
+
+          <ColorPickerField
+              id="primary"
+              label="Primary"
+              v-model="settings.colors.primaryColor"
+              theme="light"
+              :sucker-hide="false"
+              format="hex"
+          />
+
           <TextField
               id="tm_general_title"
               label="General title"
