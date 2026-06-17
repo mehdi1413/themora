@@ -16,6 +16,7 @@ import TextField from "./components/fields/TextField.vue";
 import ToggleField from "./components/fields/ToggleField.vue";
 import NumberTextField from "./components/fields/NumberTextField.vue";
 import ColorPickerField from "./components/fields/ColorPickerField.vue";
+import SimpleSelectField from "./components/fields/SimpleSelectField.vue";
 
 
 interface MenuItem {
@@ -28,7 +29,8 @@ interface MenuItem {
 
 const settings = reactive({
   general: {
-    title: ''
+    title: '',
+    selectOne: 'DESC'
   },
   archive: {
     removePrefix: false,
@@ -408,6 +410,22 @@ const toggleTheme = () => {
               theme="light"
               :sucker-hide="false"
               format="hex"
+          />
+
+          <SimpleSelectField
+              id="order"
+              label="Sort Order"
+              v-model="settings.general.selectOne"
+              :options="[
+                    {
+                    label:'نزولی',
+                    value:'DESC'
+                    },
+                    {
+                      label:'صعودی',
+                      value:'ASC'
+                    }
+                    ]"
           />
 
           <TextField
