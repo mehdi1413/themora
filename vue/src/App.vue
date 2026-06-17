@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {ref} from 'vue'
+import {ref, reactive} from 'vue'
 import BrandLayout from './components/layouts/BrandLayout.vue'
 
 import {
@@ -12,12 +12,31 @@ import {
   RiMenuLine
 } from '@remixicon/vue'
 
+import TextField from "./components/fields/TextField.vue";
+import ToggleField from "./components/fields/ToggleField.vue";
+import NumberTextField from "./components/fields/NumberTextField.vue";
+
+
 interface MenuItem {
   title: string
   icon: string
   link?: string
   children?: MenuItem[]
 }
+
+
+const settings = reactive({
+  general: {
+    title: ''
+  },
+  archive: {
+    removePrefix: false,
+    perPage: 12
+  },
+  colors: {
+    primaryColor: '#11b76b'
+  }
+})
 
 
 const sidebarOpen = ref(false)
@@ -189,7 +208,7 @@ const hasActiveChild = (key: string) => {
 const toggleSidebar = () => {
   collapsed.value = !collapsed.value
 
-  if(collapsed.value){
+  if (collapsed.value) {
     openedMenus.value = {}
   }
 }
@@ -227,7 +246,7 @@ const toggleTheme = () => {
 
 
 <template>
-  <div class="flex h-screen py-tm-60 gap-4 overflow-hidden">
+  <div class="flex h-screen py-tm-60 gap-4 overflow-hidden select-none">
     <!-- overlay -->
     <div
         v-if="sidebarOpen"
@@ -235,7 +254,8 @@ const toggleTheme = () => {
         @click="closeSidebar"
     />
     <!-- SIDEBAR -->
-    <aside class="themora-menu bg-tm-primary fixed lg:relative right-0 top-0 z-40 h-full p-tm-5 rounded-tm-12 shadow transition-all duration-300"
+    <aside
+        class="themora-menu bg-tm-primary fixed lg:relative right-0 top-0 z-40 h-full p-tm-5 rounded-tm-12 shadow transition-all duration-300"
         :class="[collapsed? 'w-20 sidebar-collapse': 'w-72 sidebar-open', sidebarOpen ? 'translate-x-0': 'translate-x-full lg:translate-x-0']"
     >
       <button
@@ -249,7 +269,7 @@ const toggleTheme = () => {
       </button>
 
       <nav>
-        <BrandLayout :collapsed="collapsed" />
+        <BrandLayout :collapsed="collapsed"/>
 
         <ul class="themora-tabs space-y-1">
           <li
@@ -333,7 +353,8 @@ const toggleTheme = () => {
                               :class="{active:activeItem ===`${index}-${cIndex}-${sIndex}`}"
                               @click.stop="setActiveItem(`${index}-${cIndex}-${sIndex}`)"
                           >
-                            <div class="group text-white px-4 py-3 cursor-pointer flex gap-4 items-center transition-all hover:text-tm-secondary">
+                            <div
+                                class="group text-white px-4 py-3 cursor-pointer flex gap-4 items-center transition-all hover:text-tm-secondary">
                               <RiCheckboxBlankCircleFill size="6px"/>
                               <span class="text-tm-13">{{ sub.title }}</span>
                             </div>
@@ -351,32 +372,52 @@ const toggleTheme = () => {
     </aside>
 
     <section class="flex-1 flex flex-col overflow-hidden bg-white p-tm-30 rounded-tm-12">
-      <header class="border-b border-dashed border-tm-light-grey py-4 flex justify-between">
-        <button
-            @click="openSidebar"
-            class="lg:hidden"
-        >
-          <RiMenuLine size="24px"/>
-        </button>
+      <form>
+        <header class="border-b border-dashed border-tm-light-grey py-4 flex justify-between">
+          <button type="button"
+                  @click="openSidebar"
+                  class="lg:hidden"
+          >
+            <RiMenuLine size="24px"/>
+          </button>
 
-        <h2 class="text-2xl">Welcome to Themora</h2>
+          <h2 class="text-2xl">Welcome to Themora</h2>
 
-        <button
-            @click="toggleTheme"
-            class="flex items-center justify-center size-tm-40 rounded-full border border-tm-light-grey"
-        >
-          <RiSunFill v-if="isDark" size="20px" color="var(--color-tm-secondary)"/>
-          <RiMoonFill v-else size="20px" color="var(--color-tm-dark)"/>
-        </button>
-      </header>
+          <button type="button"
+                  @click="toggleTheme"
+                  class="flex items-center justify-center size-tm-40 rounded-full border border-tm-light-grey"
+          >
+            <RiSunFill v-if="isDark" size="20px" color="var(--color-tm-secondary)"/>
+            <RiMoonFill v-else size="20px" color="var(--color-tm-dark)"/>
+          </button>
+        </header>
+        <main class="tm-tab-content py-6">
+          <h2 class="text-xl text-white">تنظیمات عمومی</h2>
+          <TextField
+              id="tm_general_title"
+              label="General title"
+              v-model="settings.general.title"
+          />
+          <ToggleField
+              id="tm_archive_prefix"
+              label="Remove archive prefix"
+              v-model="settings.archive.removePrefix"
+          />
 
-      <main class="py-6">
-        <h2 class="text-xl text-white">تنظیمات عمومی</h2>
-      </main>
+          <NumberTextField
+              id="tm_archive_prefix"
+              label="Remove archive prefix"
+              v-model="settings.archive.perPage"
+              :min="2"
+              :max="24"
+              :step="2"
+          />
 
-      <footer class="pt-4 border-t border-dashed border-tm-light-grey">
-        <button class="text-white bg-tm-green rounded-tm-6 px-6 py-2 cursor-pointer">save</button>
-      </footer>
+        </main>
+        <footer class="pt-4 border-t border-dashed border-tm-light-grey">
+          <button type="submit" class="text-white bg-tm-green rounded-tm-6 px-6 py-2 cursor-pointer">save</button>
+        </footer>
+      </form>
     </section>
   </div>
 </template>
