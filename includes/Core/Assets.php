@@ -21,6 +21,7 @@ class Assets {
 
 	/**
 	 * Register Plugin Scripts
+	 *
 	 * @param $hook
 	 *
 	 * @return void
@@ -44,7 +45,16 @@ class Assets {
 		);
 
 		wp_enqueue_style( 'thm-vue-css' );
+
 		wp_enqueue_script( 'thm-vue-js' );
+		wp_localize_script(
+			'thm-vue-js',
+			'themora',
+			[
+				'api_url' => rest_url( 'themora/v1/' ),
+				'nonce'   => wp_create_nonce( 'wp_rest' )
+			]
+		);
 	}
 
 	public function add_force_module_type_attributes( $tag, $handle ) {

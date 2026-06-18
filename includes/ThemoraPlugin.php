@@ -9,6 +9,7 @@ namespace Themora\Inc;
 
 use Themora\Inc\Core\Admin;
 use Themora\Inc\Core\Assets;
+use Themora\Inc\Core\Rest;
 use Themora\Inc\Settings\SettingsManager;
 use Themora\Inc\Traits\Singleton;
 
@@ -34,6 +35,7 @@ final class ThemoraPlugin {
 		$this->test_settings();
 		$this->load_admin_menu();
 		$this->load_assets();
+		$this->load_rest();
 	}
 
 	private function load_admin_menu(): void {
@@ -48,7 +50,8 @@ final class ThemoraPlugin {
 		Assets::getInstance();
 	}
 
-	private function load_dependencies() {
+	private function load_rest(): void {
+		Rest::getInstance();
 	}
 
 	private function test_settings(): void {
@@ -64,7 +67,7 @@ final class ThemoraPlugin {
 					'perPage'      => 20
 				]
 			] );
-		var_dump( $result );
-		var_dump( SettingsManager::getInstance()->get() );
+//		var_dump( $result );
+//		var_dump( SettingsManager::getInstance()->get() );
 	}
 }
