@@ -141,10 +141,17 @@
     border-radius: var(--radius-tm-6);
     transition: border-radius 0.3s ease;
 }
+.themora-tab-list-item:hover {
+    background-color: white;
+    color: var(--color-tm-dark);
+}
 
 .themora-tab-list-item.active {
     color: #000000;
     background-color: #FFFFFF;
+}
+.themora-menu.sidebar-collapse .themora-tab-list-item{
+    justify-content: center;
 }
 
 .tm-submenu-wrapper {

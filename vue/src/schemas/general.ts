@@ -23,5 +23,12 @@ export default [
                 value: 'ASC'
             }
         ]
-    }
+    },
+
+    {
+        type: 'toggle',
+        key: 'showTitle',
+        id: 'tm_show_general_title',
+        label: 'Show Title'
+    },
 ]

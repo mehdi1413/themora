@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import generalFields from '../schemas/general.ts'
-import FieldRenderer from '../components/fields/FieldRenderer.vue'
+import generalFields from '@/schemas/general.ts'
+import FieldRenderer from '@/components/fields/FieldRenderer.vue'
 
 const props = defineProps<{
   settings: Record<string, any>
