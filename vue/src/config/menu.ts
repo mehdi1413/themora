@@ -11,7 +11,55 @@ import {
 
 } from '@remixicon/vue'
 
-export const createMenus = (settings:any):MenuItem[] => [
+export const createMenus = ():MenuItem[] => [
+
+    {
+        title:'عمومی',
+        icon:RiSettings3Line,
+        page:GeneralPage,
+    },
+
+    {
+        title:'آرشیو',
+        icon:RiArchiveLine,
+        page:ArchivePage,
+    },
+
+    {
+        title:'محصولات',
+        icon:RiInstanceFill,
+        children:[
+            {
+                title:'تنظیمات محصول',
+                icon:RiCheckboxBlankCircleFill,
+                children:[
+                    {
+                        title:'ظاهر محصول',
+                        icon:RiCheckboxBlankCircleFill,
+                        link:'#'
+                    },
+                    {
+                        title:'تب ها',
+                        icon:RiCheckboxBlankCircleFill,
+                        link:'#'
+                    }
+
+                ]
+
+            },
+            {
+                title:'انبار',
+                icon:RiCheckboxBlankCircleFill,
+                link:'#'
+            }
+        ]
+
+    }
+
+]
+
+
+export const createMenusOld = (settings:any):MenuItem[] => [
 
     {
         title:'عمومی',

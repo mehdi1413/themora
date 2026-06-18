@@ -6,8 +6,11 @@ const props = defineProps<{
   settings: Record<string, any>
 }>()
 
-function updateField(key:string, value:any){
-  props.settings[key] = value
+// function updateFieldOld(key:string, value:any){
+//   props.settings[key] = value
+// }
+function updateField(key: string, value: any) {
+  props.settings.general[key] = value
 }
 </script>
 
@@ -16,7 +19,7 @@ function updateField(key:string, value:any){
       v-for="field in generalFields"
       :key="field.key"
       :field="field"
-      :model-value="settings[field.key]"
+      :model-value="settings.general[field.key]"
       @update:model-value="
         updateField(
           field.key,

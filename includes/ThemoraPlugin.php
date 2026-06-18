@@ -58,13 +58,13 @@ final class ThemoraPlugin {
 		$result =
 			SettingsManager::getInstance()->save( [
 				'general' => [
-					'title'     => 'mehdi fani 2',
-					'showTitle' => true,
+					'title'     => 'آژانس خلاقیت فرادید',
+					'showTitle' => false,
 					'selectOne' => 'ASC'
 				],
 				'archive' => [
 					'removePrefix' => true,
-					'perPage'      => 20
+					'perPage'      => 8
 				]
 			] );
 //		var_dump( $result );

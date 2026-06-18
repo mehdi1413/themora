@@ -49,9 +49,9 @@ class Assets {
 		wp_enqueue_script( 'thm-vue-js' );
 		wp_localize_script(
 			'thm-vue-js',
-			'themora',
+			'themoraData',
 			[
-				'api_url' => rest_url( 'themora/v1/' ),
+				'apiUrl' => rest_url( 'themora/v1/' ),
 				'nonce'   => wp_create_nonce( 'wp_rest' )
 			]
 		);
