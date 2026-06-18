@@ -14,12 +14,7 @@ defined( 'ABSPATH' ) || exit;
 class Assets {
 	use Singleton;
 
-	/**
-	 * Register Plugin All Assets
-	 *
-	 * @return void
-	 */
-	public function register(): void {
+	protected function __construct() {
 		add_action( 'admin_enqueue_scripts', [ $this, 'register_scripts' ], 99 );
 		add_filter( 'script_loader_tag', [ $this, 'add_force_module_type_attributes' ], 10, 2 );
 	}
@@ -31,10 +26,7 @@ class Assets {
 	 * @return void
 	 */
 	public function register_scripts( $hook ): void {
-		if (
-			$hook !== 'toplevel_page_themora-options' ||
-			wp_script_is( 'thm-vue-js', 'enqueued' )
-		) {
+		if ( $hook !== 'toplevel_page_themora-options' ) {
 			return;
 		}
 

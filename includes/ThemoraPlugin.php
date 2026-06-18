@@ -43,7 +43,7 @@ final class ThemoraPlugin {
 	 * @return void
 	 */
 	private function load_assets(): void {
-		Assets::getInstance()->register();
+		Assets::getInstance();
 	}
 
 	private function load_dependencies()
