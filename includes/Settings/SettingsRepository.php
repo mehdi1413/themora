@@ -19,7 +19,7 @@ class SettingsRepository {
 	public function get_options(): array {
 		$options = get_option( $this->option_name, [] );
 
-		return wp_parse_args( $options, Defaults::get() );
+		return array_replace_recursive( Defaults::get(), $options );
 	}
 
 	public function save_options( array $options ): bool {
