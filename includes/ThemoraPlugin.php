@@ -9,6 +9,7 @@ namespace Themora\Inc;
 
 use Themora\Inc\Core\Admin;
 use Themora\Inc\Core\Assets;
+use Themora\Inc\Settings\SettingsManager;
 use Themora\Inc\Traits\Singleton;
 
 defined( 'ABSPATH' ) || exit;
@@ -30,6 +31,7 @@ final class ThemoraPlugin {
 	 * @return void
 	 */
 	public function load(): void {
+		$this->test_settings();
 		$this->load_admin_menu();
 		$this->load_assets();
 	}
@@ -46,9 +48,23 @@ final class ThemoraPlugin {
 		Assets::getInstance();
 	}
 
-	private function load_dependencies()
-	{
+	private function load_dependencies() {
 	}
 
-
+	private function test_settings(): void {
+		$result =
+			SettingsManager::getInstance()->save( [
+				'general' => [
+					'title'     => 'mehdi fani 2',
+					'showTitle' => true,
+					'selectOne' => 'ASC'
+				],
+				'archive' => [
+					'removePrefix' => true,
+					'perPage'      => 20
+				]
+			] );
+		var_dump( $result );
+		var_dump( SettingsManager::getInstance()->get() );
+	}
 }
