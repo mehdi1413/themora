@@ -25,5 +25,6 @@ if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
 	require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 }
 
+\Themora\Inc\ThemoraPlugin::getInstance();
 
-require_once plugin_dir_path( THM_PLUGIN_PATH ) . 'includes/init.php';
+//require_once plugin_dir_path( THM_PLUGIN_PATH ) . 'includes/init.php';

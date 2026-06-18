@@ -13,18 +13,13 @@ defined( 'ABSPATH' ) || exit;
 
 trait Singleton {
 
-	/**
-	 * Singleton Instantiation Method
-	 *
-	 * @return static
-	 */
-	final public static function getInstance(): static {
+	final public static function getInstance() {
 		static $instance = [];
 
-		$called_class = static::class;
+		$called_class = get_called_class();
 
 		if ( ! isset( $instance[ $called_class ] ) ) {
-			$instance[ $called_class ] = new static();
+			$instance[ $called_class ] = new $called_class;
 		}
 
 		return $instance[ $called_class ];
