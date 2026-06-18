@@ -8,7 +8,7 @@ import Sidebar from "./Sidebar.vue";
 import FooterContent from './content/Footer.vue'
 import HeaderContent from './content/Header.vue'
 
-import {getSettings} from '../api/settings'
+import {getSettings, saveSettings} from '../api/settings'
 
 // ---------------- SETTINGS ----------------
 const settings = reactive({
@@ -42,7 +42,7 @@ const settings = reactive({
   }
 
 })
-
+// ---------------- SHOW DATABASE SETTINGS FROM REST ----------------
 onMounted(async () => {
   try {
     const data = await getSettings()
@@ -51,10 +51,22 @@ onMounted(async () => {
     console.error(e)
   }
 })
+
+// ---------------- SAVE SETTINGS ----------------
+const saving = ref(false)
+const saveSettingsData = async()=>{
+  try {
+    saving.value = true
+    const result = await saveSettings(settings)
+    console.log('SAVED:', result)
+  } catch(e){
+    console.error(e)
+  } finally {
+    saving.value=false
+  }
+}
+
 // ---------------- MENU ----------------
-// const menus = ref<MenuItem[]>(
-//     createMenus(settings)
-// )
 const menus = ref<MenuItem[]>(createMenus())
 
 
@@ -136,7 +148,10 @@ const toggleTheme = () => {
               :settings="settings"
           />
         </main>
-        <FooterContent/>
+        <FooterContent
+            :saving="saving"
+            @save="saveSettingsData"
+        />
       </form>
     </section>
   </div>

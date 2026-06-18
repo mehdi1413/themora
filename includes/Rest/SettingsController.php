@@ -52,12 +52,23 @@ class SettingsController {
 			[
 				'success' => true,
 				'data'    => $this->manager->get()
-			]
+			],
 		);
 	}
 
 	public function save_settings( WP_REST_Request $request ): WP_REST_Response {
 		$params = $request->get_json_params();
+
+		if ( empty( $params ) ) {
+			return new WP_REST_Response(
+				[
+					'success' => false,
+					'message' => 'Empty settings'
+				],
+				400
+			);
+		}
+
 		$result = $this->manager->save( $params );
 
 		return new WP_REST_Response(
