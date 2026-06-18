@@ -2,7 +2,7 @@
 /*
  * Plugin Name:       Themora
  * Plugin URI:        https://example.com/plugins/the-basics/
- * Description:       Handle the basics with this plugin.
+ * Description:       Best wordpress theme settings plugin.
  * Version:           1.0.0
  * Requires at least: 5.2
  * Requires PHP:      7.4
