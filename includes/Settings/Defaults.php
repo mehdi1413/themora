@@ -35,11 +35,27 @@ class Defaults {
 				]
 			],
 
+			'typography' => [
+				'size'  => [
+					'xl6'  => 64,
+					'xl5'  => 48,
+					'xl4'  => 32,
+					'xl3'  => 24,
+					'xl'   => 20,
+					'base' => 16,
+					'sm'   => 14,
+					'xs'   => 12,
+				],
+				'fonts' => [
+					'primary'   => '',
+					'secondary' => '',
+				]
+			],
+
 			'archive' => [
 				'removePrefix' => false,
 				'perPage'      => 12
 			]
-
 		];
 	}
 }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ref, reactive, computed, onMounted} from 'vue'
-import { useToast } from 'vue-toastification'
+import {useToast} from 'vue-toastification'
 import type {MenuItem} from '../types/menu.ts'
 import {createMenus} from '../config/menu.ts'
 
@@ -21,7 +21,7 @@ const settings = reactive({
   },
 
   colors: {
-    primary:{
+    primary: {
       main: '#c52f32',
       secondary: '#e89d26',
       dark: '#222222',
@@ -34,6 +34,23 @@ const settings = reactive({
       success: '#118E62',
       info: '#1B619A',
     },
+  },
+
+  typography: {
+    size: {
+      xl6: 64,
+      xl5: 48,
+      xl4: 32,
+      xl3: 24,
+      xl: 20,
+      base: 16,
+      sm: 14,
+      xs: 12,
+    },
+    fonts: {
+      primary: '',
+      secondary: ''
+    }
   },
 
   archive: {
@@ -57,17 +74,17 @@ const toast = useToast()
 
 // ---------------- SAVE SETTINGS ----------------
 const saving = ref(false)
-const saveSettingsData = async()=>{
+const saveSettingsData = async () => {
   try {
     saving.value = true
     const result = await saveSettings(settings)
     toast.success('تنظیمات با موفقیت ذخیره شد')
     console.log('SAVED:', result)
-  } catch(e){
+  } catch (e) {
     toast.error('خطا در ذخیره سازی تنظیمات')
     console.error(e)
   } finally {
-    saving.value=false
+    saving.value = false
   }
 }
 

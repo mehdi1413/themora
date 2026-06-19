@@ -21,9 +21,10 @@ class SettingsManager {
 		$this->repository = SettingsRepository::getInstance();
 
 		$this->validators = [
-			'general' => new GeneralSettings(),
-			'colors'  => new ColorSettings(),
-			'archive' => new ArchiveSettings(),
+			'general'    => new GeneralSettings(),
+			'colors'     => new ColorSettings(),
+			'typography' => new TypographySettings(),
+			'archive'    => new ArchiveSettings(),
 		];
 	}
 
@@ -35,6 +36,7 @@ class SettingsManager {
 
 	public function validate( array $input ): array {
 		$output = [];
+//		error_log(print_r($input, true));
 		foreach ( $this->validators as $key => $validator ) {
 			if ( ! isset( $input[ $key ] ) ) {
 				continue;

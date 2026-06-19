@@ -1,6 +1,6 @@
 <?php
 /**
- * Colors Setting Class
+ * Typography Setting Class
  *
  * @package Themora
  */
@@ -13,15 +13,14 @@ use Themora\Inc\Settings\Validators\ValidatorFactory;
 
 defined( 'ABSPATH' ) || exit;
 
-class ColorSettings implements ValidatorInterface {
+class TypographySettings implements ValidatorInterface {
 
 	public function validate( $value, array $rules = [] ): array {
 		$output = [];
 
 		foreach ( $this->schema() as $section => $fields ) {
 			foreach ( $fields as $key => $field ) {
-				$validator = ValidatorFactory::make( $field['type'] );
-
+				$validator                  = ValidatorFactory::make( $field['type'] );
 				$output[ $section ][ $key ] = $validator->validate( $value[ $section ][ $key ] ?? null, $field );
 			}
 		}
@@ -31,19 +30,19 @@ class ColorSettings implements ValidatorInterface {
 
 	protected function schema(): array {
 		return [
-			'primary' => [
-				'main'      => FieldSchema::color(),
-				'secondary' => FieldSchema::color(),
-				'dark'      => FieldSchema::color(),
-				'grey'      => FieldSchema::color(),
-				'white'     => FieldSchema::color(),
-				'green'     => FieldSchema::color(),
-				'blue'      => FieldSchema::color(),
+			'size'  => [
+				'xl6'  => FieldSchema::number( 0, 100 ),
+				'xl5'  => FieldSchema::number( 0, 100 ),
+				'xl4'  => FieldSchema::number( 0, 100 ),
+				'xl3'  => FieldSchema::number( 0, 100 ),
+				'xl'   => FieldSchema::number( 0, 100 ),
+				'base' => FieldSchema::number( 0, 100 ),
+				'sm'   => FieldSchema::number( 0, 100 ),
+				'xs'   => FieldSchema::number( 0, 100 ),
 			],
-
-			'secondary' => [
-				'success' => FieldSchema::color(),
-				'info'    => FieldSchema::color(),
+			'fonts' => [
+				'primary'   => FieldSchema::text(),
+				'secondary' => FieldSchema::text(),
 			]
 		];
 	}

@@ -8,6 +8,7 @@
 namespace Themora\Inc\Settings;
 
 use Themora\Inc\Settings\Contracts\SettingInterface;
+use Themora\Inc\Settings\Helpers\FieldSchema;
 use Themora\Inc\Settings\Validators\ValidatorFactory;
 
 defined( 'ABSPATH' ) || exit;
@@ -30,14 +31,8 @@ class ArchiveSettings implements SettingInterface {
 
 	protected function schema(): array {
 		return [
-			'removePrefix' => [
-				'type' => 'boolean'
-			],
-			'perPage'      => [
-				'type' => 'number',
-				'min'  => 2,
-				'max'  => 24,
-			]
+			'removePrefix' => FieldSchema::boolean(),
+			'perPage'      => FieldSchema::number( 2, 24 ),
 		];
 	}
 }
