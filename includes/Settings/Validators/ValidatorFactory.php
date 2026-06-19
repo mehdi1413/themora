@@ -29,6 +29,8 @@ class ValidatorFactory {
 				return new SelectFieldValidator();
 			case 'color':
 				return new ColorPickerFieldValidator();
+			case 'media':
+				return new MediaFieldValidator();
 			default:
 				throw new Exception( 'Validator not found' );
 		}

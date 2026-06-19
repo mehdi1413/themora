@@ -8,6 +8,7 @@
 namespace Themora\Inc\Settings;
 
 use Themora\Inc\Settings\Contracts\SettingInterface;
+use Themora\Inc\Settings\Helpers\FieldSchema;
 use Themora\Inc\Settings\Validators\ValidatorFactory;
 
 defined( 'ABSPATH' ) || exit;
@@ -42,7 +43,8 @@ class GeneralSettings implements SettingInterface {
 					'DESC'
 				],
 				'default' => 'DESC'
-			]
+			],
+			'logo'      => FieldSchema::media( [ 'fileType' => 'image' ] )
 		];
 	}
 }

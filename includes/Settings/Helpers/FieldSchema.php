@@ -74,4 +74,13 @@ class FieldSchema {
 			$extra
 		);
 	}
+
+	public static function media( array $extra = [] ): array {
+		return array_merge(
+			[
+				'type' => 'media'
+			],
+			$extra
+		);
+	}
 }

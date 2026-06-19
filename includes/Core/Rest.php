@@ -7,6 +7,7 @@
 
 namespace Themora\Inc\Core;
 
+use Themora\Inc\Rest\MediaController;
 use Themora\Inc\Rest\SettingsController;
 use Themora\Inc\Traits\Singleton;
 
@@ -21,5 +22,6 @@ class Rest {
 
 	public function register_routes(): void {
 		SettingsController::getInstance()->register_routes();
+		MediaController::getInstance()->register_routes();
 	}
 }

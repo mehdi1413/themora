@@ -44,6 +44,7 @@ class Assets {
 			[]
 		);
 
+		wp_enqueue_media();
 		wp_enqueue_style( 'thm-vue-css' );
 
 		wp_enqueue_script( 'thm-vue-js' );

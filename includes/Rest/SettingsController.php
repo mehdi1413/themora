@@ -1,6 +1,6 @@
 <?php
 /**
- * Rest Controller Class
+ * Rest Controller Class: Settings
  *
  * @package Themora
  */

@@ -12,17 +12,18 @@ export default [
         id: 'tm_general_sort',
         label: 'Sort Order',
 
-        options: [
-            {
-                label: 'نزولی',
-                value: 'DESC'
-            },
-
-            {
-                label: 'صعودی',
-                value: 'ASC'
-            }
-        ]
+        props:{
+            options:[
+                {
+                    label:'نزولی',
+                    value:'ASC'
+                },
+                {
+                    label:'صعودی',
+                    value:'DESC'
+                }
+            ]
+        },
     },
 
     {
@@ -31,4 +32,13 @@ export default [
         id: 'tm_show_general_title',
         label: 'Show Title'
     },
+
+    {
+        type:'media',
+        key:'logo',
+        id:'tm_logo',
+        label:'لوگو',
+        fileType:'image'
+    }
+
 ]
