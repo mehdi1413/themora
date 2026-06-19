@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ref, reactive, computed, onMounted} from 'vue'
-
+import { useToast } from 'vue-toastification'
 import type {MenuItem} from '../types/menu.ts'
 import {createMenus} from '../config/menu.ts'
 
@@ -52,14 +52,19 @@ onMounted(async () => {
   }
 })
 
+// ---------------- TOAST ----------------
+const toast = useToast()
+
 // ---------------- SAVE SETTINGS ----------------
 const saving = ref(false)
 const saveSettingsData = async()=>{
   try {
     saving.value = true
     const result = await saveSettings(settings)
+    toast.success('تنظیمات با موفقیت ذخیره شد')
     console.log('SAVED:', result)
   } catch(e){
+    toast.error('خطا در ذخیره سازی تنظیمات')
     console.error(e)
   } finally {
     saving.value=false

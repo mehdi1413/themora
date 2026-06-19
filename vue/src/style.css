@@ -390,12 +390,11 @@ button:disabled {
     border: 2px solid #ffffff52;
     border-bottom-color: #ffffff;
     border-radius: 50%;
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
     animation: 1s linear infinite rotation;
     display: inline-block;
 }
-
 @keyframes rotation {
     0% {
         transform: rotate(0deg);
@@ -403,4 +402,13 @@ button:disabled {
     100% {
         transform: rotate(360deg);
     }
+}
+
+/*VUE TOSTIFICATION STYLES*/
+.Vue-Toastification__container.themora-toast-container .Vue-Toastification__toast-body{
+    font-family: 'peyda';
+}
+.Vue-Toastification__container.bottom-left.themora-toast-container .Vue-Toastification__toast--rtl{
+    margin-right: auto;
+    margin-left: unset;
 }
