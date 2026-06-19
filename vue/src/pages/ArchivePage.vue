@@ -6,10 +6,6 @@ const props = defineProps<{
   settings: Record<string, any>
 }>()
 
-// function updateFieldOld(key:string, value:any){
-//   props.settings[key] = value
-// }
-
 function updateField(key: string, value: any) {
   props.settings.archive[key] = value
 }
