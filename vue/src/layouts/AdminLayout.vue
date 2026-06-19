@@ -20,27 +20,27 @@ const settings = reactive({
     showTitle: true
   },
 
+  colors: {
+    primary:{
+      main: '#c52f32',
+      secondary: '#e89d26',
+      dark: '#222222',
+      grey: '#555555',
+      white: '#FFFFFF',
+      green: '#118E62',
+      blue: '#1B619A',
+    },
+    secondary: {
+      success: '#118E62',
+      info: '#1B619A',
+    },
+  },
 
   archive: {
-
     removePrefix: false,
     perPage: 12
 
   },
-
-
-  colors: {
-
-    primaryColor: '#c52f32',
-    secondaryColor: '#e89d26',
-    darkColor: '#222222',
-    whiteColor: '#FFFFFF',
-    greyColor: '#555555',
-    greenColor: '#118E62',
-    blueColor: '#1B619A'
-
-  }
-
 })
 // ---------------- SHOW DATABASE SETTINGS FROM REST ----------------
 onMounted(async () => {
@@ -151,6 +151,7 @@ const toggleTheme = () => {
           <component
               :is="currentPage"
               :settings="settings"
+              :section="activeMenu?.section"
           />
         </main>
         <FooterContent

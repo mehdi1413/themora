@@ -22,6 +22,7 @@ class SettingsManager {
 
 		$this->validators = [
 			'general' => new GeneralSettings(),
+			'colors'  => new ColorSettings(),
 			'archive' => new ArchiveSettings(),
 		];
 	}
@@ -46,10 +47,10 @@ class SettingsManager {
 	}
 
 	public function save( array $input ): array {
-		$current = $this->repository->get_options();
+		$current   = $this->repository->get_options();
 		$validated = $this->validate( $input );
-		$final = array_replace_recursive( $current, $validated );
-		$saved = $this->repository->save_options( $final );
+		$final     = array_replace_recursive( $current, $validated );
+		$saved     = $this->repository->save_options( $final );
 
 		return [
 			'saved' => $saved,

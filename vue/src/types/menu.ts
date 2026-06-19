@@ -5,6 +5,7 @@ export interface MenuItem {
     icon?:Component
     link?:string
     page?:Component
+    section?:string
     settings?:any
     children?:MenuItem[]
 }

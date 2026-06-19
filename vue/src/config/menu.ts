@@ -2,77 +2,46 @@ import type { MenuItem } from '@/types/menu'
 
 import GeneralPage from '@/pages/GeneralPage.vue'
 import ArchivePage from '@/pages/ArchivePage.vue'
+import ColorsPage from "@/pages/ColorsPage.vue";
 
 import {
-    RiSettings3Line,
-    RiArchiveLine,
+    RiSettings4Fill,
+    RiArchiveFill,
     RiInstanceFill,
     RiCheckboxBlankCircleFill,
-
+    RiBrushAiFill
 } from '@remixicon/vue'
 
 export const createMenus = ():MenuItem[] => [
 
     {
         title:'عمومی',
-        icon:RiSettings3Line,
+        icon:RiSettings4Fill,
         page:GeneralPage,
     },
-
     {
-        title:'آرشیو',
-        icon:RiArchiveLine,
-        page:ArchivePage,
-    },
-
-    {
-        title:'محصولات',
-        icon:RiInstanceFill,
+        title:'رنگ بندی',
+        icon:RiBrushAiFill,
         children:[
             {
-                title:'تنظیمات محصول',
+                title:'رنگ های اصلی',
                 icon:RiCheckboxBlankCircleFill,
-                children:[
-                    {
-                        title:'ظاهر محصول',
-                        icon:RiCheckboxBlankCircleFill,
-                        link:'#'
-                    },
-                    {
-                        title:'تب ها',
-                        icon:RiCheckboxBlankCircleFill,
-                        link:'#'
-                    }
-
-                ]
-
+                page:ColorsPage,
+                section:'primary'
             },
             {
-                title:'انبار',
+                title:'رنگ های فرعی',
                 icon:RiCheckboxBlankCircleFill,
-                link:'#'
-            }
+                page:ColorsPage,
+                section:'secondary'
+            },
         ]
-
-    }
-
-]
-
-
-export const createMenusOld = (settings:any):MenuItem[] => [
-
-    {
-        title:'عمومی',
-        icon:RiSettings3Line,
-        page:GeneralPage,
-        settings:settings.general
     },
 
     {
         title:'آرشیو',
-        icon:RiArchiveLine,
+        icon:RiArchiveFill,
         page:ArchivePage,
-        settings:settings.archive
     },
 
     {
