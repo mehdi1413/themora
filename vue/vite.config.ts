@@ -4,9 +4,9 @@ import path from 'path'
 
 import tailwindcss from '@tailwindcss/vite'
 
-
 // https://vite.dev/config/
 export default defineConfig({
+  base: './',
   plugins: [
       vue(),
     tailwindcss()
@@ -27,7 +27,14 @@ export default defineConfig({
         format: 'es',
         entryFileNames: 'assets/[name].js',
         chunkFileNames: 'assets/[name].js',
-        assetFileNames: 'assets/[name].[ext]',
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name?.match(/\.(woff|woff2|ttf)$/)) {
+            return 'assets/fonts/[name][ext]'
+          }
+
+          return 'assets/[name].[ext]'
+        },
+        // assetFileNames: 'assets/[name].[ext]',
       }
     }
   }
