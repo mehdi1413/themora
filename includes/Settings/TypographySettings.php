@@ -16,12 +16,19 @@ defined( 'ABSPATH' ) || exit;
 class TypographySettings implements ValidatorInterface {
 
 	public function validate( $value, array $rules = [] ): array {
+
 		$output = [];
 
 		foreach ( $this->schema() as $section => $fields ) {
 			foreach ( $fields as $key => $field ) {
-				$validator                  = ValidatorFactory::make( $field['type'] );
-				$output[ $section ][ $key ] = $validator->validate( $value[ $section ][ $key ] ?? null, $field );
+				$validator = ValidatorFactory::make( $field['type'] );
+
+				$output[ $section ][ $key ] =
+					$validator->validate(
+						$value[ $section ][ $key ]
+						?? ( $field['default'] ?? null ),
+						$field
+					);
 			}
 		}
 
@@ -41,8 +48,7 @@ class TypographySettings implements ValidatorInterface {
 				'xs'   => FieldSchema::number( 0, 100 ),
 			],
 			'fonts' => [
-				'primary'   => FieldSchema::text(),
-				'secondary' => FieldSchema::text(),
+				'customFonts' => FieldSchema::font_repeater()
 			]
 		];
 	}

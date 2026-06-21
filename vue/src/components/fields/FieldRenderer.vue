@@ -6,6 +6,8 @@ import SimpleSelectField from './SimpleSelectField.vue'
 import MultiSelectField from '@/components/fields/MultiSelectField.vue'
 import ColorPickerField from './ColorPickerField.vue';
 import MediaUploader from "@/components/fields/MediaUploader.vue";
+import FontRepeaterField from '@/components/fields/FontRepeaterField.vue'
+
 
 const props = defineProps<{
   field: any
@@ -67,6 +69,14 @@ const emit = defineEmits([
 
   <ColorPickerField
       v-else-if="field.type === 'color'"
+      :id="field.id"
+      :label="field.label"
+      :model-value="modelValue"
+      @update:model-value="$emit('update:modelValue',$event)"
+  />
+
+  <FontRepeaterField
+      v-else-if="field.type==='font-repeater'"
       :id="field.id"
       :label="field.label"
       :model-value="modelValue"

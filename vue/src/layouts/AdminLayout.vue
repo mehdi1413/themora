@@ -48,8 +48,7 @@ const settings = reactive({
       xs: 12,
     },
     fonts: {
-      primary: '',
-      secondary: ''
+      customFonts: []
     }
   },
 
@@ -64,7 +63,6 @@ onMounted(async () => {
   try {
     const data = await getSettings()
     Object.assign(settings, data)
-    console.log('GENERAL:', settings.general)
   } catch (e) {
     console.error(e)
   }

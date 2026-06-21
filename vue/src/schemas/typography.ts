@@ -95,17 +95,11 @@ export default {
     ],
 
     fonts: [
-
         {
-            key: 'primary',
-            type: 'text',
-            label: 'فونت اصلی'
-        },
-
-        {
-            key: 'secondary',
-            type: 'text',
-            label: 'فونت دوم'
+            type:'font-repeater',
+            key:'customFonts',
+            id:'tm_custom_fonts',
+            label:'فونت سفارشی',
         }
-    ]
+    ],
 }

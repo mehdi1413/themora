@@ -49,8 +49,7 @@ class Defaults {
 					'xs'   => 12,
 				],
 				'fonts' => [
-					'primary'   => '',
-					'secondary' => '',
+					'customFonts' => []
 				]
 			],
 

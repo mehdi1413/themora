@@ -31,7 +31,6 @@ class FieldSchema {
 		);
 	}
 
-
 	/**
 	 * Generate & Handle Text Input Field Schema
 	 *
@@ -65,7 +64,6 @@ class FieldSchema {
 		);
 	}
 
-
 	public static function boolean( array $extra = [] ): array {
 		return array_merge(
 			[
@@ -84,7 +82,6 @@ class FieldSchema {
 		);
 	}
 
-
 	public static function multiselect( array $extra = [] ): array {
 		return array_merge(
 			[
@@ -96,4 +93,13 @@ class FieldSchema {
 		);
 	}
 
+	public static function font_repeater( array $extra = [] ): array {
+		return array_merge(
+			[
+				'type'    => 'font-repeater',
+				'default' => []
+			],
+			$extra
+		);
+	}
 }

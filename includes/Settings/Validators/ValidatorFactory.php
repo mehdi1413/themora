@@ -33,6 +33,8 @@ class ValidatorFactory {
 				return new MediaFieldValidator();
 			case 'multiselect':
 				return new MultiselectValidator();
+			case 'font-repeater':
+				return new FontRepeaterValidator();
 			default:
 				throw new Exception( 'Validator not found' );
 		}
