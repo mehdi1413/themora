@@ -83,4 +83,17 @@ class FieldSchema {
 			$extra
 		);
 	}
+
+
+	public static function multiselect( array $extra = [] ): array {
+		return array_merge(
+			[
+				'type'    => 'multiselect',
+				'options' => [],
+				'default' => []
+			],
+			$extra
+		);
+	}
+
 }

@@ -14,10 +14,10 @@ import {getSettings, saveSettings} from '../api/settings'
 const settings = reactive({
 
   general: {
-
     title: '',
     selectOne: 'DESC',
-    showTitle: true
+    showTitle: true,
+    items: []
   },
 
   colors: {
@@ -64,6 +64,7 @@ onMounted(async () => {
   try {
     const data = await getSettings()
     Object.assign(settings, data)
+    console.log('GENERAL:', settings.general)
   } catch (e) {
     console.error(e)
   }

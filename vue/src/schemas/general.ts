@@ -39,6 +39,39 @@ export default [
         id:'tm_logo',
         label:'لوگو',
         fileType:'image'
-    }
+    },
 
+    {
+        type:'multiselect',
+        key:'items',
+        id:'tm_profile_items',
+        label:'آیتم های پروفایل',
+
+        props:{
+            searchable:true,
+
+            options:[
+                {
+                    label:'داشبورد',
+                    value:'dashboard'
+                },
+                {
+                    label:'سفارشات',
+                    value:'orders'
+                },
+                {
+                    label:'دانلودها',
+                    value:'downloads'
+                },
+                {
+                    label:'اطلاعات حساب',
+                    value:'edit-account'
+                },
+                {
+                    label:'خروج',
+                    value:'customer-logout'
+                }
+            ]
+        }
+    }
 ]

@@ -16,7 +16,9 @@ class Defaults {
 			'general' => [
 				'title'     => '',
 				'showTitle' => true,
-				'selectOne' => 'DESC'
+				'selectOne' => 'DESC',
+				'logo'      => null,
+				'items'     => []
 			],
 
 			'colors' => [

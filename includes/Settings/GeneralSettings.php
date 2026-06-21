@@ -44,7 +44,16 @@ class GeneralSettings implements SettingInterface {
 				],
 				'default' => 'DESC'
 			],
-			'logo'      => FieldSchema::media( [ 'fileType' => 'image' ] )
+			'logo'      => FieldSchema::media( [ 'fileType' => 'image' ] ),
+			'items'     => FieldSchema::multiselect( [
+				'options' => [
+					'dashboard',
+					'orders',
+					'downloads',
+					'edit-account',
+					'customer-logout'
+				]
+			] )
 		];
 	}
 }

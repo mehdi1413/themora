@@ -3,12 +3,13 @@ import TextField from './TextField.vue'
 import ToggleField from './ToggleField.vue'
 import NumberTextField from './NumberTextField.vue'
 import SimpleSelectField from './SimpleSelectField.vue'
+import MultiSelectField from '@/components/fields/MultiSelectField.vue'
 import ColorPickerField from './ColorPickerField.vue';
 import MediaUploader from "@/components/fields/MediaUploader.vue";
 
 const props = defineProps<{
-  field:any
-  modelValue:any
+  field: any
+  modelValue: any
 }>()
 
 const emit = defineEmits([
@@ -52,6 +53,16 @@ const emit = defineEmits([
       :options="field.props?.options"
       :model-value="modelValue"
       @update:model-value="$emit('update:modelValue',$event)"
+  />
+
+  <MultiSelectField
+      v-else-if="field.type === 'multiselect'"
+      :id="field.id"
+      :label="field.label"
+      :model-value="modelValue"
+      :options="field.props?.options ?? []"
+      :searchable="field.props?.searchable ?? false"
+      @update:modelValue="$emit('update:modelValue',$event)"
   />
 
   <ColorPickerField
