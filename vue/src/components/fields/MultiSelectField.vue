@@ -305,23 +305,14 @@ onBeforeUnmount(() => {
 
 
 .tm-tag {
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 8px;
-
-  padding: 4px 10px;
-
-  border-radius: 999px;
-
-  background: #ad58ff15;
-
   color: #6e00ff;
-
+  background: #ad58ff15;
+  border-radius: 4px;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
   font-size: 13px;
-
+  display: flex;
 }
 
 
