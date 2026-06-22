@@ -7,7 +7,8 @@ import MultiSelectField from '@/components/fields/MultiSelectField.vue'
 import ColorPickerField from './ColorPickerField.vue';
 import MediaUploader from "@/components/fields/MediaUploader.vue";
 import FontRepeaterField from '@/components/fields/FontRepeaterField.vue'
-
+import IconPicker from "@/components/fields/IconPickerField.vue"
+import AccountMenuBuilder from '@/components/fields/AccountMenuBuilder.vue'
 
 const props = defineProps<{
   field: any
@@ -89,6 +90,20 @@ const emit = defineEmits([
       :label="field.label"
       :model-value="modelValue"
       :file-type="field.fileType"
+      @update:model-value="$emit('update:modelValue',$event)"
+  />
+
+  <IconPicker
+      v-else-if="field.type==='icon'"
+      :id="field.id"
+      :label="field.label"
+      :model-value="modelValue"
+      @update:modelValue="$emit('update:modelValue',$event )"
+  />
+
+  <AccountMenuBuilder
+      v-else-if="field.type==='menu-builder'"
+      :model-value="modelValue"
       @update:model-value="$emit('update:modelValue',$event)"
   />
 

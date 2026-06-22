@@ -57,6 +57,10 @@ const settings = reactive({
     perPage: 12
 
   },
+
+  account:{
+    menu:[]
+  }
 })
 // ---------------- SHOW DATABASE SETTINGS FROM REST ----------------
 onMounted(async () => {

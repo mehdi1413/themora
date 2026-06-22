@@ -56,7 +56,33 @@ class Defaults {
 			'archive' => [
 				'removePrefix' => false,
 				'perPage'      => 12
-			]
+			],
+
+			'account' => [
+				'menu' => [
+					[
+						'key'=>'dashboard',
+						'label'=>'داشبورد',
+						'enabled'=>true,
+						'showIcon'=>true,
+						'icon'=>null
+					],
+					[
+						'key'=>'orders',
+						'label'=>'سفارشات',
+						'enabled'=>true,
+						'showIcon'=>true,
+						'icon'=>null
+					],
+					[
+						'key'=>'downloads',
+						'label'=>'دانلودها',
+						'enabled'=>true,
+						'showIcon'=>true,
+						'icon'=>null
+					]
+				]
+			],
 		];
 	}
 }

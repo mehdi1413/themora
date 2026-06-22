@@ -33,7 +33,7 @@ const toggleTheme = () => {
     <button
         type="button"
         @click="toggleTheme"
-        class="flex items-center justify-center size-tm-40 rounded-full border border-tm-light-grey"
+        class="flex items-center justify-center size-tm-40 rounded-full border border-tm-light-grey cursor-pointer"
     >
       <RiSunFill v-if="isDark" size="20px" color="var(--color-tm-secondary)"/>
       <RiMoonFill v-else size="20px" color="var(--color-tm-dark)"/>

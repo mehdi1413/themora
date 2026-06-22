@@ -25,6 +25,7 @@ class SettingsManager {
 			'colors'     => new ColorSettings(),
 			'typography' => new TypographySettings(),
 			'archive'    => new ArchiveSettings(),
+			'account'    => new AccountSettings(),
 		];
 	}
 
@@ -36,7 +37,6 @@ class SettingsManager {
 
 	public function validate( array $input ): array {
 		$output = [];
-		error_log( print_r( $input, true ) );
 		foreach ( $this->validators as $key => $validator ) {
 			if ( ! isset( $input[ $key ] ) ) {
 				continue;

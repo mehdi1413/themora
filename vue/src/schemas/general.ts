@@ -73,5 +73,12 @@ export default [
                 }
             ]
         }
-    }
+    },
+
+    {
+        type:'icon',
+        key:'testIcon',
+        id:'test_icon',
+        label:'تست آیکن'
+    },
 ]

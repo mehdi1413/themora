@@ -17,18 +17,5 @@ export default [
             max:24,
             step:2
         }
-    },
-
-    {
-        type: 'attachment',
-        key: 'test',
-        id: 'tm_archive_attachment',
-        label: 'Files',
-
-        props:{
-            min:2,
-            max:24,
-            step:2
-        }
     }
 ]

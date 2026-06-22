@@ -4,6 +4,7 @@ import GeneralPage from '@/pages/GeneralPage.vue'
 import ArchivePage from '@/pages/ArchivePage.vue'
 import ColorsPage from "@/pages/ColorsPage.vue";
 import TypographyPage from "@/pages/TypographyPage.vue"
+import AccountPage from "@/pages/AccountPage.vue";
 
 import {
     RiSettings4Fill,
@@ -11,7 +12,8 @@ import {
     RiInstanceFill,
     RiCheckboxBlankCircleFill,
     RiBrushAiFill,
-    RiFontSize2
+    RiFontSize2,
+    RiUserSettingsFill
 } from '@remixicon/vue'
 
 export const createMenus = ():MenuItem[] => [
@@ -39,7 +41,6 @@ export const createMenus = ():MenuItem[] => [
             },
         ]
     },
-
 
     {
         title:'تایپوگرافی',
@@ -95,6 +96,12 @@ export const createMenus = ():MenuItem[] => [
             }
         ]
 
-    }
+    },
+
+    {
+        title:'پنل کاربری',
+        icon:RiUserSettingsFill,
+        page:AccountPage,
+    },
 
 ]
